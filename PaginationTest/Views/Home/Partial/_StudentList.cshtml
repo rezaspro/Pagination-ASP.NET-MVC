@@ -1,0 +1,48 @@
+﻿@model PagedList.IPagedList<PaginationTest.Models.Student>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" /> 
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <table class="table-bordered" cellpadding="2" cellspacing="2" width="100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Enroll No</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr style="">
+                            <td>@item.Name</td>
+                            <td>@item.EnrollNo</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+        <br/>
+        <br />
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",new { page }))
+
+       
+        
+    </div>
+</body>
+</html>
